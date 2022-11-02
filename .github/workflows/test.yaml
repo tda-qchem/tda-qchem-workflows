@@ -2,6 +2,9 @@ name: test-workflows
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'devtools/conda-envs/test_env.yaml'
+      - '.github/workflows/test.yaml'
 
 jobs:
   test-ubuntu:
@@ -18,21 +21,29 @@ jobs:
       - name: create environment
         uses: conda-incubator/setup-miniconda@v2
         with:
-          auto-activate-base: false
+          miniconda-version: "latest"
+          channels: conda-forge,defaults
+          use-only-tar-bz2: true
+          auto-activate-base: true
           auto-update-conda: true
-          activate-environment: test_env
-          environment-file: devtools/conda-envs/test_env.yaml
+          #activate-environment: test_env
+          #environment-file: devtools/conda-envs/test_env.yaml
 
         #run:
         #  conda update conda
         #  conda env update -f devtools/conda-envs/test_env.yaml -n base
 
-      - name: check solution
+      - name: install dependencies
         run: |
-          conda env export
+          echo "begin: PATH=$PATH;"
+
+          conda create -y --name test_env devtools/conda-envs/test_env.yaml
+          conda activate test_env || true
+          echo "after conda activate test_env: PATH=$PATH;"
+          which pytest || true
+
 
       - name: Test with pytest
-        #shell: bash -l {0}
         run: |
           which pytest
           pytest help
