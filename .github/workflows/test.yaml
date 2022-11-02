@@ -3,10 +3,16 @@ name: test-workflows
 on:
   push:
     branches: [ "main" ]
+    paths:
+￼      - 'conda-envs/test_env.yaml'
+￼      - '.github/workflows/test.yaml'
 
 jobs:
   test-ubuntu:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
 
     steps:
       - uses: actions/checkout@v2
