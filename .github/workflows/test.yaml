@@ -39,12 +39,14 @@ jobs:
 
           conda env create --name test_env --file devtools/conda-envs/test_env.yml
           conda activate test_env || true
+          conda list || true
           echo "after conda activate test_env: PATH=$PATH;"
           which pytest || true
+          pytest --version || true
 
 
       - name: Test with pytest
         run: |
-          which pytest
-          pytest help
+          which pytest || true
+          pytest --version || true
 
