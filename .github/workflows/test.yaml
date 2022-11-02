@@ -1,5 +1,4 @@
 name: test-workflows
-
 on:
   push:
     branches: [ "main" ]
@@ -14,7 +13,7 @@ jobs:
 
     steps:
       - name: checkout repository
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: create environment
         uses: conda-incubator/setup-miniconda@v2
@@ -27,7 +26,7 @@ jobs:
         #  conda env update -f devtools/conda-envs/test_env.yaml -n base
 
       - name: Test with pytest
-        shell: bash -l {0}
+        #shell: bash -l {0}
         run: |
           which pytest
           pytest help
