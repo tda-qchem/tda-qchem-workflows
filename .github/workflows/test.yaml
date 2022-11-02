@@ -13,14 +13,22 @@ jobs:
         shell: bash -l {0}
 
     steps:
+      - name: checkout repository
       - uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          conda update conda
-          conda env update -f devtools/conda-envs/test_env.yaml -n base
+      - name: create environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: test_env
+          environment-file: devtools/conda-envs/test_env.yaml
+
+        #run:
+        #  conda update conda
+        #  conda env update -f devtools/conda-envs/test_env.yaml -n base
 
       - name: Test with pytest
+        shell: bash -l {0}
         run: |
           which pytest
+          pytest help
 
