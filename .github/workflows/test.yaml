@@ -3,7 +3,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - 'devtools/conda-envs/test_env.yaml'
+      - 'devtools/conda-envs/test_env.yml'
       - '.github/workflows/test.yaml'
   pull_request:
     branches: ["main"]
