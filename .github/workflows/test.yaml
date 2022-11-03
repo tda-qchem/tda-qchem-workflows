@@ -5,8 +5,6 @@ on:
     paths:
       - 'devtools/conda-envs/test_env.yml'
       - '.github/workflows/test.yaml'
-  pull_request:
-    branches: ["main"]
 
 jobs:
   test-ubuntu:
