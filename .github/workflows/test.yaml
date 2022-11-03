@@ -1,14 +1,16 @@
 name: test-workflows
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
       - 'devtools/conda-envs/test_env.yaml'
       - '.github/workflows/test.yaml'
+  pull_request:
+    branches: ["main"]
 
 jobs:
   test-ubuntu:
-    name: tests on ubuntu
+    name: test on ubuntu
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -49,4 +51,22 @@ jobs:
         run: |
           which pytest || true
           pytest --version || true
+
+      # bind to tda-qchem-explorations
+      - uses: actions/checkout@v2
+        with:
+          repository: "tda-qchem/tda-qchem-explorations"
+          ref: "main"
+          path: "tda-qchem-explorations"
+        name: Checkout scratch TDA-QCHEM data
+
+    - name: Run Python scripts on tda-qchem-explorations data
+      run: |
+        cd tda-qchem-explorations
+        python3 -u python/run.py
+
+
+
+
+
 
