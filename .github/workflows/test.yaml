@@ -1,14 +1,14 @@
 name: test-workflows
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
     paths:
       - 'devtools/conda-envs/test_env.yml'
       - '.github/workflows/test.yaml'
 
 jobs:
   test-ubuntu:
-    name: test on ubuntu
+    name: tests on ubuntu
     runs-on: ubuntu-latest
     defaults:
       run:
