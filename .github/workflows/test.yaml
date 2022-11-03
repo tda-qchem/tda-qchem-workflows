@@ -58,10 +58,10 @@ jobs:
           path: "tda-qchem-explorations"
         name: Checkout scratch TDA-QCHEM data
 
-    - name: Run Python scripts on tda-qchem-explorations data
-      run: |
-        cd tda-qchem-explorations
-        python3 -u python/run.py
+      - name: Run Python scripts on tda-qchem-explorations data
+        run: |
+          cd tda-qchem-explorations
+          python3 -u python/run.py
 
 
 
